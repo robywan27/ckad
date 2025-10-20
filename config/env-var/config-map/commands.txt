@@ -1,0 +1,7 @@
+ABBREVIATION: cm
+
+kubectl create configmap webapp-config-map \
+    --from-literal=APP_COLOR=darkblue \
+    --from-literal=APP_OTHER=disregard
+
+k create cm app-config --from-file=app_config.properties
