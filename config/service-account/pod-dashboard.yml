@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-k8s-dashboard
+  labels:
+    name: my-k8s-dashboard
+spec:
+  containers:
+  - name: my-k8s-dashboard
+    image: my-k8s-dashboard
+# uses default service account

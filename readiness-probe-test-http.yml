@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp
+  labels:
+    app.kubernetes.io/name: simple-webapp
+spec:
+  containers:
+  - name: simple-webapp
+    image: simple-webapp
+    ports:
+      - containerPort: 8080
+    readinessProbe: # tests if the pod is ready; no traffic is redirected to this pod if it's not
+      httpGet:
+        path: /api/ready
+        port: 8080
+
+      initialDelaySeconds: 10 # delay before starting the probe
+      periodSeconds: 5 # how many seconds before retrying probe
+      failureThreshold: 8 # how many times to probe before pod is considered not ready; default value is 3

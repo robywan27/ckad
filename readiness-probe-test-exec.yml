@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp
+  labels:
+    app.kubernetes.io/name: simple-webapp
+spec:
+  containers:
+  - name: simple-webapp
+    image: simple-webapp
+    ports:
+      - containerPort: 8080
+    readinessProbe: # tests if the pod is ready; no traffic is redirected to this pod if it's not
+      exec:
+        command:
+          - cat
+          - /app/is_ready

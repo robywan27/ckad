@@ -1,0 +1,3 @@
+Node Selectors use labels
+
+k label nodes node-1 size=Large -> where size is the label key and Large is the label value

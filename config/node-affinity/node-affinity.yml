@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: mypp
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution: # other node affinity types are e.g. preferredDuringScheduleIgnoredDuringExecution, ...
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In # otehr operators are e.g. NotIn, Exists, ...
+            values:
+            - Large
+            - Medium

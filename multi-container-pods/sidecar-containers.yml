@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp
+  labels:
+    name: simple-webapp
+
+spec:
+  containers:
+  - name: web-app
+    image: web-app
+    ports:
+      - containerPort: 8080
+  initContainers: # runs at start and ends once it's done; then main container starts
+  - name: db-checker
+    image: busybox
+    command: ['wait-for-db-to-start.sh']
+    restartPolicy: Always # this policy ensures that the container keeps running even after it's done
+                          # it ends after the main app is terminated, thus allowing to catch its logs in case it's needed

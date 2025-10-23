@@ -1,0 +1,17 @@
+THEORY
+
+taint is applied to nodes, tolerations are applied to pods
+
+k taint nodes node-name key==value:taint-effect -> 3 types of effects
+    NoSchedule - pods (which don't tolerate node's taint) not scheduled on the node with taint
+    PreferNoSchedule - like NoSchedule but with no guarantee
+    NoExecute - like NoSchedule but existing pods are also evicted if they don't tolerate the taint
+
+COMMANDS:
+
+k taint nodes node1 app=myapp:NoSchedule
+
+k taint nodes node1 taint:NoSchedule- -> removes the taint (note - sign at the end)
+
+k8s master node is never scheduled any pod because it has a taint
+k describe node kubemaster | grep Taint -> node-role.kubernetes.io/master:NoSchedule
