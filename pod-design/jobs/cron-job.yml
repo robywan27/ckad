@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reporting-cron-job
+spec: # for cronjob
+  schedule: "*/1 * * * *" # minute, hour, day of the month, month, day of the week
+  jobTemplate:
+    spec: # for the job
+      completions: 3
+      parallelism: 3
+      template:
+        spec: # for the pod
+          containers:
+          - name: reporting-tool
+            image: reporting-tool
+          restartPolicy: Never

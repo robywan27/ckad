@@ -1,0 +1,8 @@
+k8s attempts to keep pods running indefinitely; by default the property restartPolicy is set to Always
+Other alternatives are Never or OnFailure
+
+Jobs allow to perform tasks to completion (default policy is Never). They start a certain number of pods to do that (like replicaSets)
+
+k get jobs
+
+k get cronjob

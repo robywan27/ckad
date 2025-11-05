@@ -1,0 +1,5 @@
+k get pods --selector app=App1 -> get pods with the specified label(s)
+
+k get pods --selector app=App1,env=dev,bu=finance -> multiple labels are separated by comma
+
+k get all --selector ... -> get all objects (pods, services, replicaSets, ...) by label

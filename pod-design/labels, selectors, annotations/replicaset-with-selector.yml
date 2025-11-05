@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myreplicaset
+  labels: # labels of the replicaSet
+    app: App
+    Function: Front-end
+annotations: # record info for informatory purposes (labels are for goruping objects)
+  buildVersion: 1.34
+spec:
+  replicas: 3
+  selector:
+    matchLabels: # links the replicaSet with the pods
+      app: App
+  template:
+    metadata:
+      labels: # labels of the pod
+        app: App
+        Function: Front-end
+    spec:
+      containers:
+        - name: myapp
+          image: myapp

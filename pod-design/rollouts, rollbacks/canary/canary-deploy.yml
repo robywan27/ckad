@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-canary
+  labels:
+    app: myapp
+    type: front-end # same label
+spec:
+  selector:
+    matchLabels:
+      version: v1
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        version: v1
+    spec:
+      containers:
+      - name: myapp-container
+        image: myapp-image:2.0 # newer version
+    replicas: 1 # set lower number of replicas - with Istio it's possible to set a precise percentage of traffic to be routed

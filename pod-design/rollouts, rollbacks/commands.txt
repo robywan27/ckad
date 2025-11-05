@@ -1,0 +1,26 @@
+This section regards deployment objects
+
+status
+    k rollout status deployment/my-deployment
+
+    k rollout history deploy/my-deployment -> to see the revisions and history
+        --revision=n -> check the status of revision n
+
+update
+    k apply -f config.yml
+    
+    k set image deploy/my-deployment nginx=nginx:1.9.1 -> updates image of the app; unlike k apply this command results in a different configuration file
+        --record -> save the command used to create/update a deployment against a revision number
+
+rollback
+    k rollback undo deploy my-deployment -> new pods will be destroyed and the old pods restored
+        --to-revision=n -> roll back to specific revision
+
+scale
+    k scale deploy my-deployment --replicas=n
+
+Types of rollouts: 
+    - ROLLING UPDATES
+    - RECREATE
+    - BLUE-GREEN
+    - CANARY

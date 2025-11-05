@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    version: v1 # for blue-green deployment, just set version value to v2
