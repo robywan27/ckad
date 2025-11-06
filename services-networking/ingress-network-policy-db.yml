@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector: # to link the pod this network policy should be applied on; match on label
+    matchLabels:
+      role: db
+  policyTypes:
+  # blocks all traffic except traffic in by the pod via port defined by the ingress rule
+  # note that it also allows traffic out via the same route from the pod with the NP! (e.g. db query from api-pod needs to receives the db result)
+  - Ingress
+  ingress:
+  - from:
+    # rule 1
+    - podSelector: # match pod to accept ingress traffic from
+        matchLabels:
+          name: api-pod
+      namespaceSelector: # match only pods from defined namespace; otherwise any pod matching the label api-pod can communicate with db
+        matchLabels:
+          kubernetes.io/metadata.name: prod
+    # rule 2 - note that starting with a - defines a new rule, so traffic allowed has to match either rule 1 or rule 2
+    # if namespaceSelector started with a - then there would be 3 distinct rules and traffic only need to match either one of them!
+    - ipBlock: # allows to define a range of IP addresses from which to allow traffic to the pod
+        cidr: 192.168.5.10/32
+    ports:
+    - protocol: TCP
+      port: 3306

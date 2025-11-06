@@ -1,0 +1,4 @@
+k get all -> see all objects (in default ns)
+k get all -A -> see all objects in all namespaces
+k get pods -A -> list all pods in all namespaces
+k get deploy (or any other object) -n <namespace_name> OR k get deploy --namespace=<namespace_name> -> search object in specified namespace (otherwise it searches in default ns)

@@ -1,0 +1,9 @@
+k8s by default defines an All Allow policy which allows traffic to flow between all pods and services in the cluster
+Network policies allow to define rules to restrict traffic among pods
+
+k get networkpolicy
+
+k get ingress
+
+k create ingress <ingress-name> --rule="host/path=service:port"
+    e.g.: k create ingress ingress-test --rule="wear.my-online-store.com/wear*=wear-service:80"
