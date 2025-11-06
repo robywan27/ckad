@@ -1,0 +1,40 @@
+STORAGE IN DOCKER
+
+Docker stores its files in path:
+/var/lib/docker
+    aufs
+    containers - all files related to containers
+    image - all files related to images
+    volumes - all volumes created
+
+docker build Dockerfile -t robywan/my-app -> builds the image layers (read-only); layers are stored and cached for future app rebuild or even if a different image performs some of the same operations
+docker run robywan/my-app -> creates the container layer (read-write); stores data created by container (logs, temp files, files used by the user, ...)
+
+
+VOLUMES
+Data is persisted even after teh container is destroyed. Without volumes that data (inside teh container layer) is all gone
+
+VOLUME MOUNT:
+docker volume create data_volume - creates a folder data_volume under path /var/lib/docker/volumes
+docker run -v data_volume:/var/lib/mysql mysql - mounts the volume in the docker container; to the right of : you specify the location inside the container; here mysql is the img name
+
+docker run -v data_volume2:/var/lib/mysql mysql - creates volume data_volume2 if it wasn't created yet
+
+BIND MOUNT:
+docker run -v /data/mysql:/var/lib/mysql mysql - mount the data in the specified location to the left of the :
+
+more modern version of the command (current preferred choice):
+docker run --mount type=bind,source=/data/mysql,target=/var/lib/mysql mysql
+
+Storage drivers
+Help manage storage on images and containers; Docker picks the appropriate storage driver based on the system it runs upon
+
+Volume drivers
+Volumes are handled by Volume drivers. Default driver is Local, but there are others to mount volumes on third-party systems e.g. Azure File Storage
+
+following attaches a volume on AWS EBS
+docker run -it \
+    --name mysql
+    --volume-driver rexray/ebs
+    --mount src=ebv-vol,target=/var/lib/mysql
+    mysql

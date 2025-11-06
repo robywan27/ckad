@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-number-generator
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args: ["shuf -i 0-100 -n 1 >> /opt/number.out"]
+    volumeMounts: # mounts the volume on the /opt directory inside the container
+    - mountPath: /opt
+      name: data-volume
+  # not recommended on multi-node cluster because the volume is mounted on every node
+  volumes:
+  - name: data-volume
+  awsElasticBlockStore: # mounts volume on AWS EBS
+    volumeID: <volume-id>
+    fsType: ext4

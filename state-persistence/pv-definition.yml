@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-vol1
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath: # not for prod
+    path: /tmp/data
+  persistentVolumeReclaimPolicy: Delete # by default it's set to Retain, so that if an associated pvc is deleted then the pv remains with the data; with Delete the pv is removed
