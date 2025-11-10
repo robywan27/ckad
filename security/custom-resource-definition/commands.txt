@@ -1,0 +1,35 @@
+Resource
+once a resource (e.g. deployment) is created, its info is stored in the etcd db
+
+Controller (written in e.g. Go or Python)
+it's an ongoing background process whose job is to:
+    - monitor the resource it's tasked of
+    - apply changes to resource
+
+resource - controller
+replicaSet - replicaSetController
+deployment - deploymentController
+...
+
+can create Custom Resources and its associated Custom Controllers
+
+Custom Resource Definition (CRD) - tells k8s that we want to define a custom resource
+
+after creating a CRD, it's then possible to perform commands with the custom resource (e.g. k get)
+
+k get crd
+
+k get <new-object>
+
+
+Custom Controller
+after creating a custom resource, it's possible to adjust its behavior via a custom controller
+
+
+
+Operator framework
+allows to package and deploy the CRD and custom controller together
+
+there's several Operators available (operatorhub.io)
+e.g. etcd operator to deploy and manage an etcd cluster
+    etcdCluster (CRD) - etcd controller

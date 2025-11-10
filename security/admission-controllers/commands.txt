@@ -1,0 +1,49 @@
+kubelet -> kube-apiserver -> create pod
+
+when hitting the apiserver security the request goes through the following security mechanisms:
+kubelet -> authentication -> authorization -> admission controllers -> create pod
+
+authentication - certificates check (~/.kube/config)
+authorization - user permissions check (RBAC)
+admission controllers: help impose security measures on how a cluster is used; it can validate requests but also change request itself or perform operations before the pod is created
+    examples of things it can do:
+        - only permit images from certain registry
+        - don't permit runAs root user
+        - only permit certain capabilities
+        - pod always has labels
+    
+Types of admission controllers:
+    - AlwaysPullImages -> ensures that every time a pod is created an image is pulled
+    - DefaultStorageClass
+    - EventRateLimit
+    - NamespaceExists
+    - NamespaceAutoProvision
+    - ...
+
+k run nginx --image nginx --namespace blue -> if the ns blue doesn't exist then the request is rejected; it's emabled by default
+
+
+kube-apiserver -h | grep enable-admission-plugins -> lists admission controllers enabled by default
+
+notes on how to run kube-apiserver command:
+k get pods -n kube-system
+k exec -it kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep 'enable-admission-plugins'
+OR
+vim /etc/kubernetes/manifests/kube-apiserver.yaml and search for enable-admission-plugins in the file
+OR
+ps -ef | grep kube-apiserver | grep admission-plugins
+
+
+
+Admission controllers can be:
+    1. Mutating
+    2. Validating
+
+flow of invocation of admission controllers goes: first mutating, then validating
+
+MutatingAdmissionWebhook
+ValidatingAdmissionWebhook
+
+1 set up a Admission Webhook Server
+2 deploy a webhook deployment and service
+3 create ValidatingAdmissionWebhook (or MutatingAdmissionWebhook) object 

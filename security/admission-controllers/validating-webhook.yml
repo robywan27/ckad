@@ -1,0 +1,19 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: "pod-policy.example.com"
+webhooks:
+- name: "pod-policy.example.com"
+  clientConfig:
+    service:
+      name: "webhook-namespace"
+      namespace: "webhook-service"
+    caBundle: "Ceruj4Qe6rs0D...ewrwdrCas"
+  rules:
+  - apiGroups: [""]
+    apiVersions: ["v1"]
+    operations: ["CREATE"]
+    resources: ["pods"]
+    scope: "Namespaced"
+  admissionReviewVersions: ["v1beta1"]
+  sideEffects: None
