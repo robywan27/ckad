@@ -1,0 +1,33 @@
+Helm works like a package manager and a release manager
+it allows to treat your apps as apps instead of a collection of objects
+don't need to keep track, edit all yaml files for every single component
+
+helm install app ...
+helm upgrade app ...
+helm rollback app ...
+helm uninstall app ...
+
+there is a single values.yml where you can change all the config you need instead of multiple files
+
+
+
+Helm Chart: Templates + values.yml + Chart.yml
+template: {{.Values.<name>}}
+
+
+helm search hub wordpress -> search for existing charts in artifacthub.io; or visit the website directly
+
+helm repo add bitnami https://charts.bitnami.com/bitnami -> if you want to search in another chart repo you first hav eto add it
+helm search repo wordpress -> repo instead of hub
+
+helm repo list
+
+helm install [release-name] [chart-name] - a release is an installation of a repository
+helm install release-1 bitnami/wordpress
+helm install release-2 bitnami/wordpress
+...
+
+helm list
+helm uninstall my-release
+helm pull --untar bitnami/wordpress -> to download a chart without installing
+helm install release-4 ./wordpress

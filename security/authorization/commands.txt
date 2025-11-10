@@ -1,0 +1,67 @@
+Authorization mechanisms including
+    1. Node
+    2. ABAC
+    3. RBAC
+    4. Webhook
+    5. AlwaysAllow - allows all requests without authorization checks; set by default
+    6. AlwaysDeny - denies all requests
+
+
+
+1. Node - access within the cluster
+users and kubelet access the node talking with the kube-apiserver
+kubelet
+    read - services, endpoints, nodes, pods
+    write - node status, pod status, events
+
+Node authorizer - manages node authorization
+kubelet is part of the system:node group, so its requests are authorized by the node authorizer and granted permission
+
+
+
+External access to the API (e.g. via users)
+
+2. ABAC (attribute-based authorization control)
+Associates a user/group of users with a set of permissions
+
+create a json file with a list of permissions per user:
+{"kind": "Policy", "spec": {"user": "dev-user", "namespace": "*", "resource": "pods", "apiGroup": "*"}}
+...
+
+
+3. RBAC (role-based access control)
+You define roles associated with permissions; then you assign the users to those roles
+It's more maintainable that ABAC because you just need to update the role and not all users
+
+k get roles
+k get rolebindings
+k describe role developer
+k describe rolebinding devuser-developer-binding
+
+(I as a user do I have authorization?)
+k auth can-i create deployments 
+k auth can-i delete nodes
+k auth can-i get pod/pod-name - when resourceNames is specified you can check if you have permission over a specific resource
+k auth can-i create pods --as dev-user --namespace prod - only if you are admin you can impersonate other users
+
+
+4. Webhook
+When you want to outsource all authorization mechanisms externally
+Example: using Open Policy Agent tool
+
+
+
+Authorization mode
+Authorization mechanisms are enabled by authentication mode of kube-apiserver; default is AlwaysAllow
+it's possible to set multiple mechanisms (separated by commas):
+    when a user makes a request the first specified mechanism checks the authorization; if it fails then the request goes to the next mechanism in the chain
+
+
+
+
+Cluster roles
+resources that are not namespaced, like nodes, pv, clusterroles, clusterrolebindings, namespaces, ...
+
+k api-resources --namespaced=false -> check non-namespaced resources
+
+Note: it's possible to assign a clusterrole to namespaced-resources. That means that resource is accessible across all namespaces

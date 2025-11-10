@@ -1,0 +1,62 @@
+k8s API is grouped in different groups
+    /version - to view the version of the cluster
+    /api - core group
+    /apis - named group
+    /metrics - monitor the health of the cluster
+    /healthz - monitor the health of the cluster
+    /logs - integrating with third-party logging apps
+
+
+/api
+    /v1
+        pods
+        namespaces
+        events
+        rc
+        configmaps
+        ...
+
+
+named groups are more organized and where it's moving at
+/apis
+    /apps                   -> Api Group
+        /v1
+            /deployments    -> Resource
+                list        -> Action/Verb
+                get         -> Action/Verb
+                create      ...
+                delete
+                update
+                watch
+            /replicasets    -> Resource
+    /extensions             -> Api Group
+    /networking.k8s.io      ...
+        /v1
+            /networkpolicies
+    /storage.k8s.io
+    /authentication.k8s.io
+    /certificates.k8s.io
+        /v1
+            /certificatesigningrequests
+
+in summary:
+Named (/apis)
+    Api Groups
+        Resources
+            Actions/Verbs
+
+
+
+to look at the kube-apiserver config file
+cat /etc/kubernetes/manifests/kube-apiserver.yml
+
+to access kube-apiserver
+curl https://localhost:6443 -k -> list groups
+    --key admin.key
+    --cert admin.crt
+    --cacert ca.crt
+curl https://localhost:6443 -k ... | grep "name" -> list resource groups
+
+can use a kubectl proxy that uses credential from the kubeconfig file to access the cluster
+k proxy
+curl https://localhost:8001 -k -> calls the kube-apiserver passing the right credentials

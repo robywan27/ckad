@@ -1,0 +1,27 @@
+It's possible to create service accounts
+
+k create sa (serviceaccount) sa1
+k get sa
+
+
+It's not possible to create users.
+User authentication is managed by kube-apiserver
+
+
+
+
+KUBECONFIG
+by default k8s looks for a config file in $HOME/.kube
+
+Format:
+    clusters - contains the server specification
+    users - user accounts to access clusters; admin user key and certificates go in this section
+    contexts - define which user accounts access which cluster
+
+No user is created, you use existing ones and only define which clusters they can access
+
+k config view -> view the current config file in use
+
+k config view --kubeconfig=my-custom-config - specify the config file to view
+
+k config use-context prod-user@prod - change current context to specified one 
