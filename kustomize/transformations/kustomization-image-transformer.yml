@@ -1,0 +1,3 @@
+images: # replaces the image of all resources with a new image; note that what's replaced is the value of the 'image' field, not 'name'
+  - name: nginx
+    newName: haproxy

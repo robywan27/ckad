@@ -1,0 +1,3 @@
+images: # for all resources: image: nginx -> image: nginx:2.4
+  - name: nginx
+    newTag: 2.4

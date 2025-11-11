@@ -1,0 +1,44 @@
+Kustomize solves use cases such as how can you customize each environment without having to duplicate code
+How:
+    - base config - represents all config that's identical across all envs and default values
+    - overlay - allow to customize behavior on a per env basis
+Folder structure
+k8s/
+    base/
+        kustomization.yaml
+        nginx-depl.yaml
+        redis-deply.yaml
+        ...
+    overlays/
+        dev/
+            kustomization.yaml
+            config-map.yaml
+        stg/
+            kustomization.yaml
+            config-map.yaml
+        prod/
+            kustomization.yaml
+            config-map.yaml
+
+Kustomize takes base and overlay and generates the final manifest files to provide to the cluster
+base + overlay -> final manifests
+
+
+Helm vs Kustomize
+- Kustomize is all about simplicity (no templates), everything is just yaml so can be validated and processed as such
+- Helm uses Go templates to allow assigning variables to properties
+
+Folder structure for Helm project
+k8s/
+    environments/                   assigns values to templates per env
+        values.dev.yaml
+        values.stg.yaml
+        values.prod.yaml
+    templates/                      contains manifests with templates in them 
+        nginx-depl.yaml
+        nginx-service.yaml
+        ...
+
+- Helm is also a package manager for your app
+- Helm provides extra features like conditionals, loops, functions, hooks
+- templates can become hard to read and are not valid yaml

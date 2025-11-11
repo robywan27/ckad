@@ -1,0 +1,13 @@
+patches:
+  - target:
+      kind: Deployment
+      name: api-deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/metadata/labels/component # component is the dictionary key
+        value: web # web is the value
+      - op: add
+        path: /spec/template/metadata/labels/org
+        value: KodeKloud
+      - op: remove
+        path: /spec/template/metadata/labels/app # removes the dictionary with key 'app'

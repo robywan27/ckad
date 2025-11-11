@@ -1,0 +1,11 @@
+bases:
+  - ../../base
+
+patches:
+  - target:
+      kind: Deployment
+      name: nginx-deployment
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2

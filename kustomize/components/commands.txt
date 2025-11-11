@@ -1,0 +1,32 @@
+Components provide the ability to define reusable pieces of configuration logic (resources + patches) that can be included in multiple overlays
+useful when apps support multiple optional features that need to be enabled only in a subset of overlays
+
+
+example:
+
+base/
+    kustomization.yaml
+    api-depl.yaml
+overlays/
+    dev/
+        kustomization.yaml
+    premium/
+        kustomization.yaml
+    self-hosted/
+    kustomization.yaml
+components/
+    caching/
+        kustomization.yaml
+        redis-depl.yaml
+        deployment-patch.yaml
+    db/
+        kustomization.yaml
+        postgres-depl.yaml
+        deployment-patch.yaml
+
+
+want to enable caching only for: premium, self-hosted
+want to enable external db only for: dev, premium
+then introduce a components folder where you define the config for the caching and db
+overlays can just import those components
+

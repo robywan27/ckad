@@ -1,0 +1,13 @@
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: api-deployment
+      spec:
+        template:
+          metadata:
+            labels:
+              components: web # value of component is replaced with value 'web'
+              org: kodekloud # this dictionary is not present in the original manifest, so it's added
+              app: null # removes the dictionary with key 'app'

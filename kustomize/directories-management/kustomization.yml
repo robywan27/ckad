@@ -1,0 +1,15 @@
+# following two are optional as kustomize will pick up default values;
+# but can be useful in case of breaking changes in future versions
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# k8s resources to be managed by kustomize
+resources:
+  - api/api-depl.yml
+  - api/api-service.yml
+  - db/api-depl.yml
+  - db/api-service.yml
+
+# customizations that need to be made
+commonLabels: # adds the following label to every resource specified above
+  company: KodeKloud

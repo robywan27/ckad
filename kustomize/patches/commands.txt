@@ -1,0 +1,28 @@
+Patches provide another way to modify k8s configs
+Unlike transformers, patches target one or more specific sections in a resource
+
+need to provide 3 params:
+    - operation type: add/remove/replace
+    - target: which resource to patch
+    - value: the value that will be replaced/added
+
+json 6902 patch
+    patches:
+    - target:
+        kind: Deployment
+        name: api-deployment
+        
+        patch: |-     # inline patch
+        - op: replace
+            path: /spec/replicas
+            value: 5
+
+strategic merge patch:
+    patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+            name: api-deployment
+        spec:
+            replicas: 5

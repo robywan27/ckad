@@ -1,0 +1,17 @@
+patches:
+  - target:
+      kind: Deployment
+      name: api-deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0    # 0 is the index of the element to change
+        value:
+          name: haproxy
+          image: haproxy
+      - op: add
+        path: /spec/template/spec/containers/-   # - means append to the end of the list; otherwise pass the index of the position to add element to
+        value:
+          name: haproxy
+          image: haproxy
+      - op: remove
+        path: /spec/template/spec/containers/1 # removes the second container

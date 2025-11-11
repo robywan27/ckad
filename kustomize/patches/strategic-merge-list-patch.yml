@@ -1,0 +1,16 @@
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: api-deployment
+      spec:
+        template:
+          spec:
+            containers:
+              - name: nginx
+                image: haproxy
+              - name: haproxy     # this container is not in the original manifest so it's added
+                image: haproxy
+              - $patch: delete    # delete directive specifies which container to delete
+                name: database

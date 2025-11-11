@@ -1,0 +1,6 @@
+patches:
+  - path: replica-patch.yaml
+    target:
+      kind: Deployment
+      name: api-deployment
+    

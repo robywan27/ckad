@@ -1,0 +1,4 @@
+resources:
+  - nginx-deploy.yaml
+  - service.yaml
+  - redis-depl.yaml

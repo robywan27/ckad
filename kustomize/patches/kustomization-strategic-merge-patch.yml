@@ -1,0 +1,8 @@
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:  # target
+        name: api-deployment
+      spec:   # patch; it sees a different value in the manifest and applies this one
+        replicas: 5

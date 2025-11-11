@@ -1,0 +1,31 @@
+kustomize build k8s/
+    -> imports the specified resources and apply customizations to them
+    -> output shows the config of the modified resources
+
+- Kustomize looks for a kustomization file which contains:
+    - list of all the manifests to manage
+    - all the customizations to be applied
+- the kustomize build command combines all manifests and applies the defined transformations
+- does NOT apply/deploy the resources to a cluster; output needs to be redirected to the k apply command        
+    kustomize build k8s/ | kubectl apply -f -
+
+to delete the resources created via kustomize:
+    kubectl delete -k k8s/        (-k here is for kustomize)
+    OR
+    kustomize build k8s/ | kubectl delete -f -
+
+
+
+Directories
+
+k apply -f k8s/api/ -> deploys all resources in api/ directory
+
+but if specify in resources all files with the directory name e.g. api/db-depl.yml then:
+    kubectl apply -k k8s
+deploys all resources from all the sub-directories
+
+best way to handle this: add a kustomization file in every sub-directory, then a root-level kustomization with the list of directories
+apply will deploy all resources
+    kubectl apply -k k8s
+
+

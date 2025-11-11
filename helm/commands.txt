@@ -9,6 +9,16 @@ helm uninstall app ...
 
 there is a single values.yml where you can change all the config you need instead of multiple files
 
+Folder structure (check also section on Kustomize)
+k8s/
+    environments/                   assigns values to templates per env
+        values.dev.yaml
+        values.stg.yaml
+        values.prod.yaml
+    templates/                      contains manifests with templates in them 
+        nginx-depl.yaml
+        nginx-service.yaml
+        ...
 
 
 Helm Chart: Templates + values.yml + Chart.yml
