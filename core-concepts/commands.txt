@@ -1,4 +1,53 @@
-k get all -> see all objects (in default ns)
-k get all -A -> see all objects in all namespaces
-k get pods -A -> list all pods in all namespaces
-k get deploy (or any other object) -n <namespace_name> OR k get deploy --namespace=<namespace_name> -> search object in specified namespace (otherwise it searches in default ns)
+Operations:
+    Create:
+        k create -f <resource-file>.yml
+    List:
+        k get <resource>
+        k get all            -> get all objects (in default ns)
+    Get:
+        k describe <resource> <resource-name>
+        k get <resource> <resource-name>
+    Update:
+        k get <resource> <resource-name> -o yaml > <resource-file>.yml
+        k edit <resource> <resource-name>               -> saves changes in temp file
+            k replace [--force] -f <tamp-file>.yml
+    Delete:
+        k delete <resource> <resource-name>
+    Explain:
+        k api-resources     - list all k8s resource types
+        k explain <resource>                - brief description + list top-level fiedls of resource
+        k explain <resource>.<field>        - brief description + list sub-fields
+        k explain <resource> --recursive    - brief description + comprehensive list of all fields
+    Test command:
+        --dry-run=test          - used to test a command (tells you if the the resource can be created) without creating the resource
+        -o yaml         - output the resource definition in yaml on the screen
+        e.g.    k run nginx --image=nginx --run-dry=test -o yaml > nginx.yml
+
+
+Pods
+k run nginx --image nginx
+k get po
+k create -f pod-def.yml
+k describe po mypod
+k get po mypod -o yaml > pod-def.yml
+k edit po mypod
+
+ReplicaSets and Replication Controllers
+k get rc
+k get rs
+k scale --replicas=<n_of_replicas> rs my-rs
+k scale --replicas=<n_of_replicas> -f rs-def.yml
+
+Deployments
+k get deploy
+
+Namespaces
+k get <resource> -n <ns_name>   (OR --namespace=<ns-name>)
+k create -f pod-def.yml -n dev      - otherwise resource is created in default ns
+k create ns <ns-name>
+k config set-context $(k config current-context) -n=<ns-name>           - switch to ns-name ns
+k get all -A           (OR --all-namespaces)  -> get all objects in all namespaces
+k get <resource> -A -> list all <resource> in all namespaces
+
+Services
+k get svc
