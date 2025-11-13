@@ -5,9 +5,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - targetPort: 80
-      port: 80
-      nodePort: 30008
+    - targetPort: 80  # if not provided it's given same value as port
+      port: 80        # only mandatory field
+      nodePort: 30008 # a free port in range 30000-32767 is selected
   selector:
     app: myapp
     type: front-end

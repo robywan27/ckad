@@ -7,7 +7,7 @@ spec:
   - name: simple-webapp-color
     image: simple-webapp-color
     ports:
-      - containerPort: 8080
+    - containerPort: 8080
     envFrom:
-      - configMapRef:
+    - configMapRef:
         name: app-config

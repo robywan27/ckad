@@ -10,7 +10,7 @@ spec:
     image: simple-webapp
     ports:
       - containerPort: 8080
-    livinessProbe: # tests if the running app is healthy
+    livinessProbe: # tests if the running app in the container is healthy
       httpGet: # or tcpSocket or exec
         path: /api/ready
         port: 8080

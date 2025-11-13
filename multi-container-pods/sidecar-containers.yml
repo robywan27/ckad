@@ -11,7 +11,7 @@ spec:
     image: web-app
     ports:
       - containerPort: 8080
-  initContainers: # runs at start and ends once it's done; then main container starts
+  initContainers: # runs at start and once it's ready, the main container starts
   - name: db-checker
     image: busybox
     command: ['wait-for-db-to-start.sh']

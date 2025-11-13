@@ -12,7 +12,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: size
-            operator: In # otehr operators are e.g. NotIn, Exists, ...
+            operator: In # other operators are e.g. NotIn, Exists, ...
             values:
             - Large
             - Medium

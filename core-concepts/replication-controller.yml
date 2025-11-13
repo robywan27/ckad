@@ -6,7 +6,7 @@ metadata:
     app: myapp
     type: front-end
 spec:
-  template:
+  template: # pod definition (basically a copy paste of the metadata and spec content of the pod.yml)
     metadata:
       name: myapp
       labels:

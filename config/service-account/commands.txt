@@ -5,11 +5,11 @@ k create serviceaccount dashboard-sa
 k describe sa dashboard-sa -> shows the generated secret token; used as bearer token for REST calls to k8s api
 k describe secret dashboard-sa-token-kbbdm -> check secret
 
-k describe pod my-k8s-dashboard -> shows volume created for 'default' service account (automatically created for 
-    default namespace) with mount point in container
+k describe pod my-k8s-dashboard -> shows volume created for 'default' service account secret with mount point in container
 k exec -it my-k8s-dashboard -- ls /var/run/secrets/kubernetes.io/serviceaccount -> ca.crt token namespace
 k exec -it my-k8s-dashboard -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 
 
 from version 1.24 secret and token aren't automatically created
-k create token dashboard-sa -> to create token
+k create token dashboard-sa -> to create token (expiry is usually set to one hour, but it's possible to configure this)
+you can also create a secret object associated to the sa; it will create a non-expiring token

@@ -1,1 +1,2 @@
+Pass env vars in Docker:
 docker run -e APP_COLOR=green simple-webapp-color

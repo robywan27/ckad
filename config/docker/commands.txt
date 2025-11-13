@@ -1,7 +1,23 @@
-docker build -t ubuntu-sleeper .
+docker build Dockerfile -t robywan/my-app       - build image and add tag name to it
 
-docker run ubuntu-sleeper -> runs sleep 5
+docker run robywan/my-app                       - run a container from an image
 
-docker run ubuntu-sleeper 10 -> overrides arg (in CMD) and runs sleep 10
+docker run -n myapp robywan/my-app              - run and assign a name to the container
 
-docker run --entrypoint sleep2.0 ubuntu-sleeper 10 -> also overrides program (in ENTRYPOINT) and runs sleep2.0 10
+docker push robywan/my-app                      - to publish to public registry
+
+docker ps                   - list running containers
+docker ps -a                   - list all containers
+
+
+docker build -t ubuntu-sleeper .        -> build image
+
+if Dockerfile-cmd ("CMD sleep 5"):
+    docker run ubuntu-sleeper sleep 10      -> you must pass both args because command in CMD gets replaced
+
+if Dockerfile-sleeper ("ENTRYPOINT ["sleep"]  CMD ["5]"):
+    docker run ubuntu-sleeper               -> you don't need to pass any arg and the default behavior is "sleep 5"
+
+    docker run ubuntu-sleeper 10            -> overrides arg (in CMD) and runs "sleep 10"
+
+    docker run --entrypoint sleep2.0 ubuntu-sleeper 10      -> also overrides program (in ENTRYPOINT) and runs "sleep2.0 10"

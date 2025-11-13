@@ -5,12 +5,12 @@ metadata:
   name: cpu-resource-constraint
 spec:
   limits:
-    - default:
+    - default:          # default limit
         memory: 1Gi
-      defaultRequest:
+      defaultRequest:   # default request
         memory: 1Gi
-      max:
+      max:              # limit - max limit set to container
         memory: 1Gi
-      min:
+      min:              # request - min request in a pod a container can make
         memory: 500Mi
       type: Container

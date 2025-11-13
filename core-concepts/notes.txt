@@ -1,0 +1,65 @@
+k8s cluster:
+    Master node
+        kube-apiserver
+        etcd
+        controller
+        scheduler
+    Worker node(s)
+        container runtime
+        kubelet
+        kube-proxy
+
+
+Pods
+1-to-1 or 1-to-many (as longs as containers are of different type) relationship with containers
+
+
+ReplicaSets and Replication Controllers
+high availability
+load balancing and scaling
+
+replicasets define how many pods to replicate:
+    first it finds existing pods via label (selector) and checks how many there are
+    if there are fewer pods than what's defined in replicas it creates new pods based on the template
+
+
+Deployments
+allows to update pods or replicasets via rolling updates, undo changes, pause, redo changes, ...
+hierarchy of resources:
+    deployment
+    replicaSet
+    pod
+
+
+Namespaces
+    - isolation for resources - e.g. for env (dev, staging, prod)
+    - policies to assign to resources
+    - resources limits
+    - DNS - a resource can refer to another resource in the same ns by its name
+        - to access resource from another ns the format is:
+            e.g. db-service.dev.svc.cluster.local
+                cluster.local - domain name of cluster
+                svc - service
+                dev - namespace
+                db-service - name of the service
+
+
+Services
+provides networking capabilities
+service types
+    - NodePort: listens to a port on the node and makes the pods accessible externally; it forwards requests to the pods and back
+      - use case:
+        want to access a pod from my laptop; laptop has an IP address that's different from the IP range of pods in the node. So it's not possible to access the pods directly
+            3 types of ports:
+                target port (80) - port where the webserver is running; svc forwards the requests to this port
+                port (80) - port of the svc
+                nodePort (30008) - port on the node used to access the webserver externally; range 30000-32767
+        it's now possible to access the pod e.g. by executing: curl://192.168.1.2:30008   (IP address is that of the node)
+      - selector allows to match the svc to pods:
+        - mapping of 1 svc to multiple pods in the same node: svc does automatic load balancing
+        - mapping of 1 svc to multiple pods in multiple nodes: svc is created so that it spans across all nodes and maps target port to same nodePort
+          can access any of these pods by using the IP of the cluster and nodePort
+    - ClusterIP: svc creates a virtual IP inside the cluster to enable communication between different services
+        IP addresses of pods are not static, pods go down and back up
+        ClusterIP svc can group pods together (e.g. back-end, front-end) and provide an interface to access the pods in the group
+    - LoadBalancer: does load balancing to your app by e.g. distributing traffic to the pods

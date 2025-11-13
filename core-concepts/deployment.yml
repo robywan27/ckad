@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # similar definition to replicaSet (here is the same except kind), but deployments allow more capabilities
 metadata:
   name: myapp-depl
   labels:

@@ -1,3 +1,16 @@
-Node Selectors use labels
+Node Selectors determines which pods can be placed on specific nodes
+use labels
 
 k label nodes node-1 size=Large -> where size is the label key and Large is the label value
+
+
+Node Affinity provides more advanced capabilities for placing pods on nodes
+types
+    During scheduling - state where a pod doesn't exist and is created for the first time
+    During execution - state where the pod is running and a change has been made to the affinity, e.g. label of the node
+
+
+Node affinity vs taints and tolerations
+    taints and tolerations prevent certain pods from not being assigned to a certain node but don't guarantee that pods prefer only nodes with the taint; it can be scheduled on another node
+    node affinity prevents pods from being placed on other nodes but doesn't guarantee that a pod without matching label is not placed on node with a certain label
+    combination of them is ideal

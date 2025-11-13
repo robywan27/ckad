@@ -1,0 +1,9 @@
+Containers in same POD share:
+    lifecycle: created and detroyed at the same time
+    network: share the same network so they can refer to each other as localhost
+    storage: have access to the same storage volumes
+
+Design patterns:
+    - co-located containers: containers are meant to run throughout the pod's lifecycle; these services are dependent on each other
+    - regular init containers: there needs to be an initialization step, so one contianer must start before others; this container stops after its' done then other containers start
+    - sidecar containers: hybrid, like init containers start first, but after it's done it contains to run throughout pod's lifecycle

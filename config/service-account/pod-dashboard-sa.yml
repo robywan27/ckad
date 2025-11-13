@@ -9,4 +9,4 @@ spec:
   - name: my-k8s-dashboard
     image: my-k8s-dashboard
   serviceAccountName: dashboard-sa
-  # autoMountServiceAccountToken: false. -> tell to nout automatically mount a service account
+  # autoMountServiceAccountToken: false. -> tell to not automatically mount a service account

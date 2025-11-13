@@ -6,5 +6,5 @@ spec:
   containers:
     - name: ubuntu-sleeper
       image: ubuntu-sleeper
-      command: ["sleep2.0"]
-      args: ["10"]
+      command: ["sleep2.0"]   # overrides the Entrypoint instruction in the Dockerfile
+      args: ["10"]            # overrides the CMD instruction in the Dockerfile

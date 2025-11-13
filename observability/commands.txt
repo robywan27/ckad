@@ -5,7 +5,7 @@ POD status
     ContainerCreating - starts the containers
     Running - after all containers have been started
 
-POD conditions
+POD conditions (true/false)
     PodScheduled
     Initialized
     ContainersReady

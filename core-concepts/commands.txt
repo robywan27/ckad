@@ -8,9 +8,16 @@ Operations:
         k describe <resource> <resource-name>
         k get <resource> <resource-name>
     Update:
-        k get <resource> <resource-name> -o yaml > <resource-file>.yml
-        k edit <resource> <resource-name>               -> saves changes in temp file
-            k replace [--force] -f <tamp-file>.yml
+        1. k get <resource> <resource-name> -o yaml > <resource-file>.yml
+            vim <resource-file>.yml
+            k delete <resource> <resource-name>
+            k create -f <resource-file>.yml
+        2. k edit <resource> <resource-name>               -> edits resource config
+            if you edit some field that's not allowed, then the changes are saved in a temp file
+                k replace [--force] -f <temp-file>.yml
+                OR
+                k delete <resource> <resource-name>
+                k create -f <temp-file>.yml
     Delete:
         k delete <resource> <resource-name>
     Explain:

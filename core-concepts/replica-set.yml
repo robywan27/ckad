@@ -6,7 +6,7 @@ metadata:
     app: myapp
     type: front-end
 spec:
-  template:
+  template: # pod definition (basically a copy paste of the metadata and spec content of the pod.yml)
     metadata:
       name: myapp
       labels:
@@ -17,6 +17,8 @@ spec:
       - name: nginx
         image: nginx
   replicas: 3
+  # <- DIFFERENCE with replication controllers
+  # replicasets allow to manage also pods that were not created by it
   selector:
     matchLabels:
       type: front-end

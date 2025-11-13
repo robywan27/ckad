@@ -1,0 +1,6 @@
+Requests and Limits
+    requests: the request of a resource (e.g. cpu, memory) a container makes
+        if there is more resource available in the node, the container can use more resource than its specified request
+    limits: defines a threshold to a container for the consumption of a resource
+        cpu: limit is imposed by cpu throttling limiting how much cpu is used
+        memory: limit is imposed by OOM (out of memory) kills so the container is terminated
