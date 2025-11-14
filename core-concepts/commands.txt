@@ -52,7 +52,9 @@ Namespaces
 k get <resource> -n <ns_name>   (OR --namespace=<ns-name>)
 k create -f pod-def.yml -n dev      - otherwise resource is created in default ns
 k create ns <ns-name>
-k config set-context $(k config current-context) -n=<ns-name>           - switch to ns-name ns
+k config set-context $(k config current-context) --namespace=<ns-name>          - switch to ns-name ns
+ OR
+k config set-context --current --namespace=myns ?
 k get all -A           (OR --all-namespaces)  -> get all objects in all namespaces
 k get <resource> -A -> list all <resource> in all namespaces
 

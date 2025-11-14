@@ -1,5 +1,23 @@
-k get pods --selector app=App1 -> get pods with the specified label(s)
-
-k get pods --selector app=App1,env=dev,bu=finance -> multiple labels are separated by comma
+k get pods -l app=App1   (--selector)                           -> get pods with the specified label(s)
+    k get pods --selector app=App1,env=dev,bu=finance           -> multiple labels are separated by comma
 
 k get all --selector ... -> get all objects (pods, services, replicaSets, ...) by label
+
+k get po --show-labels  -> show all pods (in ns) and their labels
+
+
+
+not in udemy course
+
+update labels:
+k label po my-pod new-key=new-value [--overwrite]
+
+k get po -L <label-key>     (--label-columns)           -> show label key as column
+
+
+annotate resources
+k annotate po pod1 pod2 ... <annotation>=<value>
+
+k annotate po pod1 --list
+OR
+k describe po pod1 | grep -i 'annotations'

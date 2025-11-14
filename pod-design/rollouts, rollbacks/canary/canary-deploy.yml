@@ -4,16 +4,17 @@ metadata:
   name: myapp-canary
   labels:
     app: myapp
-    type: front-end # same label
+    type: front-end
 spec:
   selector:
     matchLabels:
-      version: v1
+      version: front-end
   template:
     metadata:
       name: myapp-pod
       labels:
-        version: v1
+        version: v2
+        app: front-end # same label
     spec:
       containers:
       - name: myapp-container

@@ -1,5 +1,11 @@
 This section regards deployment objects
 
+Types of rollouts: 
+    - ROLLING UPDATES - resources in old version go down one by one and resources in new version go up one by one; default deployment strategy
+    - RECREATE - everything in old version goes down then every resource in new version goes up
+    - BLUE-GREEN - both versions (old = blue, new = green) are deployed and running; traffic is still routed to blue, but once tests pass for green then traffic goes to green
+    - CANARY - new version is up and only small percentage of traffic is routed to it; after tests for new version pass, can route traffic to new version (e.g. with rolling update); finally canary goes down and old version too
+
 status
     k rollout status deployment/my-deployment
 
@@ -7,6 +13,7 @@ status
         --revision=n -> check the status of revision n
 
 update
+   
     k apply -f config.yml
     
     k set image deploy/my-deployment nginx=nginx:1.9.1 -> updates image of the app; unlike k apply this command results in a different configuration file
@@ -18,9 +25,3 @@ rollback
 
 scale
     k scale deploy my-deployment --replicas=n
-
-Types of rollouts: 
-    - ROLLING UPDATES
-    - RECREATE
-    - BLUE-GREEN
-    - CANARY

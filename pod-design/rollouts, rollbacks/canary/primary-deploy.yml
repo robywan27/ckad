@@ -8,12 +8,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      version: v1
+      version: front-end
   template:
     metadata:
       name: myapp-pod
       labels:
         version: v1
+        app: front-end
     spec:
       containers:
       - name: myapp-container

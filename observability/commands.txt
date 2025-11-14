@@ -14,7 +14,8 @@ POD conditions (true/false)
 
 LOGGING
 
-k logs -f mypod -> show logs live from the pod
+k logs mypod  -> show snapshot logs
+k logs -f mypod -> show streaming live logs from the pod
 k logs -f mypod mycontainer -> if the pod has multiple containers you need to specify from which one to stream the logs
 
 

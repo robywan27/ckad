@@ -10,6 +10,9 @@ k exec -it my-k8s-dashboard -- ls /var/run/secrets/kubernetes.io/serviceaccount 
 k exec -it my-k8s-dashboard -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 
 
+
 from version 1.24 secret and token aren't automatically created
-k create token dashboard-sa -> to create token (expiry is usually set to one hour, but it's possible to configure this)
+
+k create token dashboard-sa             -> creates token for service account dashboard-sa (same name as token!); expiry is usually set to one hour, but it's possible to configure this
+
 you can also create a secret object associated to the sa; it will create a non-expiring token

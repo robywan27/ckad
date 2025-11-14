@@ -4,3 +4,8 @@ Requests and Limits
     limits: defines a threshold to a container for the consumption of a resource
         cpu: limit is imposed by cpu throttling limiting how much cpu is used
         memory: limit is imposed by OOM (out of memory) kills so the container is terminated
+
+
+k create limits my-limit
+
+k create quota my-quota --hard=cpu=1,memory=1G,pods=2,...
