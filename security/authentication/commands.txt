@@ -16,7 +16,7 @@ by default k8s looks for a config file in $HOME/.kube
 Format:
     clusters - contains the server specification
     users - user accounts to access clusters; admin user key and certificates go in this section
-    contexts - define which user accounts access which cluster
+    contexts - define which user account access which cluster
 
 No user is created, you use existing ones and only define which clusters they can access
 

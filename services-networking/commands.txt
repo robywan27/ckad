@@ -3,6 +3,19 @@ Network policies allow to define rules to restrict traffic among pods
 
 k get networkpolicy
 
+
+
+Ingress
+ingress helps a user access your app using a single externally accessible url that you can configure to route traffic to different services within the cluster based on the url path
+    and also allows to implement ssl security
+it's like a load balancer built into the cluster that can be configured using native k8s primitives as any other k8s object
+needs to be exposed to make it accessible outside the cluster (e.g. by a NodePort type of service)
+
+ingress controller (as a sort of reverse proxy such as nginx)
+    +
+ingress resources (config)
+
+
 k get ingress
 
 k create ingress <ingress-name> --rule="host/path=service:port"

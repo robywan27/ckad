@@ -21,7 +21,7 @@ k8s/
         ...
 
 
-Helm Chart: Templates + values.yml + Chart.yml
+Helm Chart: templates + values.yml + Chart.yml
 template: {{.Values.<name>}}
 
 

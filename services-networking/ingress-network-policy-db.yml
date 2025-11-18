@@ -8,7 +8,7 @@ spec:
       role: db
   policyTypes:
   # blocks all traffic except traffic in by the pod via port defined by the ingress rule
-  # note that it also allows traffic out via the same route from the pod with the NP! (e.g. db query from api-pod needs to receives the db result)
+  # note that it also allows traffic out via the same route from the pod with the NP! (e.g. db query from api-pod needs to receive the db result)
   - Ingress
   ingress:
   - from:
@@ -23,6 +23,6 @@ spec:
     # if namespaceSelector started with a - then there would be 3 distinct rules and traffic only need to match either one of them!
     - ipBlock: # allows to define a range of IP addresses from which to allow traffic to the pod
         cidr: 192.168.5.10/32
-    ports:
+    ports:  # port other pods/services are allowed to send traffic to pod db
     - protocol: TCP
       port: 3306

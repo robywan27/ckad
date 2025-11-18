@@ -10,4 +10,4 @@ k create -f pvc-definition.yml
 k get pvc (persistentvolumeclaim)
 k delete pvc mypvc - if the pvc is in use by a pod then its status is left hanging at Terminating
 
-In this scenario, the created pvc is linked with the pv because the accessMode matches and the even though the request of space is lower there are no other pvs
+In this scenario, the created pvc is linked with the pv because the accessMode matches and even though the request of space is lower there are no other pvs

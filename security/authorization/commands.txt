@@ -41,8 +41,8 @@ k describe rolebinding devuser-developer-binding
 (I as a user do I have authorization?)
 k auth can-i create deployments 
 k auth can-i delete nodes
-k auth can-i get pod/pod-name - when resourceNames is specified you can check if you have permission over a specific resource
-k auth can-i create pods --as dev-user --namespace prod - only if you are admin you can impersonate other users
+k auth can-i get pod/pod-name                               - when resourceNames is specified you can check if you have permission over a specific resource
+k auth can-i create pods --as dev-user --namespace prod     - only if you are admin you can impersonate other users
 
 
 4. Webhook
@@ -62,6 +62,6 @@ it's possible to set multiple mechanisms (separated by commas):
 Cluster roles
 resources that are not namespaced, like nodes, pv, clusterroles, clusterrolebindings, namespaces, ...
 
-k api-resources --namespaced=false -> check non-namespaced resources
+k api-resources --namespaced=false              -> check non-namespaced resources
 
 Note: it's possible to assign a clusterrole to namespaced-resources. That means that resource is accessible across all namespaces

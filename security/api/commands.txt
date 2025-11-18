@@ -5,23 +5,22 @@ Any API group can support multiple versions:
     /v1beta - has e2e tests
 
 some objects support multiple versions at the same time and you can create distinct objects of each version
-- preferred version which is used by default when calling commands e.g. k get or k explain
-- storage version is the version in which an objects is stored in etcd; an object of a different version is going to be converted to the storage version
+    - preferred version - is used by default when calling commands e.g. k get or k explain
+    - storage version - is the version in which an object is stored in etcd; an object of a different version is going to be converted to the storage version
 preferred and storage versions can be different
 
 
 
 API Deprecations
+
+evolution of API: /v1alpha1 -> /v1alpha2 -> ... -> /v1beta1 -> /v1beta2 -> ... -> /v1
+older versions can be deleted and deprecated as api evolves (according to certain rules)
+
 Rules:
     1. API elements may only be removed by incrementing the version of the API group
         e.g.: API /webinar is still in /v1alpha1 but is deprecated in /v1alpha2
     2. API objects must be able to round-trip between API versions in a given release without information loss, with the exception of whole REST resources that don't exist in some versions
         e.g.: object Course introduces new field duration in /v1alpha2 but it's not there in /v1alpha1; then this field has to be added to /v1alpha1
-
-evolution of API: /v1alpha1 -> /v1alpha2 -> ... -> /v1beta1 -> /v1beta2 -> ... -> /v1
-older versions can be deleted and deprecated as api evolves
-
-Deprecation Rules:
     3. an API version in a given track may not be deprecated until a new API version at least as stable is released
         e.g.: /v2alpha1 can't deprecate /v1
     4a. ... older API versions must be supported after their announced deprecation for a duration no less than:

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-wear
 spec:
-  defaultBackend:
+  defaultBackend: # refer to wear-service as backend
     service:
       name: wear-service
       number: 80

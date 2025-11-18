@@ -22,8 +22,8 @@ named groups are more organized and where it's moving at
     /apps                   -> Api Group
         /v1
             /deployments    -> Resource
-                list        -> Action/Verb
-                get         -> Action/Verb
+                list        -> Verb
+                get         -> Verb
                 create      ...
                 delete
                 update
@@ -43,7 +43,7 @@ in summary:
 Named (/apis)
     Api Groups
         Resources
-            Actions/Verbs
+            Verbs (Actions)
 
 
 
@@ -51,12 +51,12 @@ to look at the kube-apiserver config file
 cat /etc/kubernetes/manifests/kube-apiserver.yml
 
 to access kube-apiserver
-curl https://localhost:6443 -k -> list groups
+curl https://localhost:6443 -k                          -> list groups
     --key admin.key
     --cert admin.crt
     --cacert ca.crt
-curl https://localhost:6443 -k ... | grep "name" -> list resource groups
+curl https://localhost:6443 -k ... | grep "name"        -> list resource groups
 
 can use a kubectl proxy that uses credential from the kubeconfig file to access the cluster
 k proxy
-curl https://localhost:8001 -k -> calls the kube-apiserver passing the right credentials
+curl https://localhost:8001 -k                          -> calls the kube-apiserver passing the right credentials

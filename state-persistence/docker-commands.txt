@@ -12,7 +12,7 @@ docker run robywan/my-app -> creates the container layer (read-write); stores da
 
 
 VOLUMES
-Data is persisted even after teh container is destroyed. Without volumes that data (inside teh container layer) is all gone
+Data is persisted even after the container is destroyed. Without volumes that data (inside the container layer) is all gone
 
 VOLUME MOUNT:
 docker volume create data_volume - creates a folder data_volume under path /var/lib/docker/volumes

@@ -17,10 +17,10 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
-  egress:
+  egress: # allows pod db to send traffic to a target pod/service/external server
   - to:
     - ipBlock:
         cidr: 192.168.5.10/32
-  ports:
+  ports:  # the port the external server allows traffic in
   - protocol: TCP
     port: 80

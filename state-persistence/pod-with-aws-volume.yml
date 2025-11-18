@@ -14,6 +14,6 @@ spec:
   # not recommended on multi-node cluster because the volume is mounted on every node
   volumes:
   - name: data-volume
-  awsElasticBlockStore: # mounts volume on AWS EBS
-    volumeID: <volume-id>
-    fsType: ext4
+    awsElasticBlockStore: # mounts volume on AWS EBS
+      volumeID: <volume-id>
+      fsType: ext4

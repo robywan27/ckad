@@ -44,6 +44,6 @@ flow of invocation of admission controllers goes: first mutating, then validatin
 MutatingAdmissionWebhook
 ValidatingAdmissionWebhook
 
-1 set up a Admission Webhook Server
+1 set up an Admission Webhook Server
 2 deploy a webhook deployment and service
 3 create ValidatingAdmissionWebhook (or MutatingAdmissionWebhook) object 
